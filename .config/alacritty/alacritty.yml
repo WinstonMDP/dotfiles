@@ -1,0 +1,14 @@
+import:
+  - ~/.config/alacritty/themes/themes/xterm.yaml
+
+env:
+  Term: alacritty
+
+font:
+  normal:
+    family: JetBrainsMono Nerd Font
+    #    family: JetBrains Mono
+    #    family: Source Code Pro
+    #    style: Medium
+    #    family: Menlo
+  size: 13
