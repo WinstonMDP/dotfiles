@@ -17,12 +17,14 @@ Plug 'sainnhe/everforest'
 Plug 'sainnhe/edge'
 Plug 'EdenEast/nightfox.nvim'
 Plug 'preservim/vim-colors-pencil'
+Plug 'mweisshaupt1988/neobeans.vim', { 'as': 'neobeans' }
+Plug 'tjdevries/colorbuddy.nvim', { 'branch': 'dev' }
+Plug 'jesseleite/nvim-noirbuddy'
+Plug 'alligator/accent.vim'
+Plug 'andreasvc/vim-256noir'
 
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
-
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-lua/popup.nvim'
 call plug#end()
 
 syntax on
@@ -55,13 +57,14 @@ let g:sonokai_style = 'default'
 let g:gruvbox_material_foreground = 'mix'
 let g:gruvbox_material_background = 'soft'
 let g:everforest_background = 'default'
-colorscheme gruvbox-material
+let g:accent_colour = 'cyan'
+colorscheme noirbuddy
 
 lua << EOF
-require'nvim-treesitter.configs'.setup {
-  highlight = {
-    enable = true
-  }
+require('nvim-treesitter.configs').setup {
+    highlight = {
+        enable = true
+    }
 }
 local cmp = require('cmp');
 cmp.setup {
@@ -101,7 +104,14 @@ end
 require('lspconfig').rust_analyzer.setup {
     on_attach = on_attach,
     cmd = {'rustup', 'run', 'stable', 'rust-analyzer'},
-    capabilities = require('cmp_nvim_lsp').default_capabilities()
+    capabilities = require('cmp_nvim_lsp').default_capabilities(),
+    settings = {
+        ["rust-analyzer"] = {
+            check = {
+                command = { "clippy" }
+            }
+        }
+    }
 }
 require('lualine').setup()
 EOF
