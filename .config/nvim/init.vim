@@ -1,4 +1,6 @@
 call plug#begin()
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 Plug 'neovim/nvim-lspconfig'
 
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -12,11 +14,15 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'sainnhe/sonokai'
 Plug 'sainnhe/gruvbox-material'
 Plug 'sainnhe/everforest'
+Plug 'sainnhe/edge'
 Plug 'EdenEast/nightfox.nvim'
 Plug 'preservim/vim-colors-pencil'
 
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
+
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/popup.nvim'
 call plug#end()
 
 syntax on
@@ -52,6 +58,11 @@ let g:everforest_background = 'default'
 colorscheme gruvbox-material
 
 lua << EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true
+  }
+}
 local cmp = require('cmp');
 cmp.setup {
     completion = {
@@ -60,7 +71,7 @@ cmp.setup {
     snippet = {
         expand = function(args)
             require('luasnip').lsp_expand(args.body)
-        end,
+        end
     },
     mapping = cmp.mapping.preset.insert {
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -71,7 +82,8 @@ cmp.setup {
     },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        { name = 'luasnip' }
+        { name = 'luasnip' },
+        { name = "path" }
     }, {
         { name = 'buffer' }
     })
