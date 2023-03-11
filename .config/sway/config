@@ -230,4 +230,7 @@ input "type:keyboard" {
     xkb_options grp:alt_shift_toggle
 }
 
+bindsym Print exec grim ~/other/screenshots/screen-"$(date +%s)".png
+bindsym $mod+Print exec grim -g "$(slurp)" ~/other/screenshots/screen-"$(date +%s)".png
+
 include /etc/sway/config.d/*

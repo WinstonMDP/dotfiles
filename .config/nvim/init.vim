@@ -58,7 +58,7 @@ let g:gruvbox_material_foreground = 'mix'
 let g:gruvbox_material_background = 'soft'
 let g:everforest_background = 'default'
 let g:accent_colour = 'cyan'
-colorscheme noirbuddy
+" colorscheme noirbuddy
 
 lua << EOF
 require('nvim-treesitter.configs').setup {
@@ -113,5 +113,15 @@ require('lspconfig').rust_analyzer.setup {
         }
     }
 }
-require('lualine').setup()
+require('noirbuddy').setup {
+    preset = 'minimal'
+}
+local noirbuddy_lualine = require('noirbuddy.plugins.lualine')
+require('lualine').setup {
+    options = {
+        theme = noirbuddy_lualine.theme
+    },
+    sections = noirbuddy_lualine.sections,
+    inactive_sections = noirbuddy_lualine.inactive_sections
+}
 EOF
