@@ -1,5 +1,7 @@
 call plug#begin()
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'rktjmp/lush.nvim'
+Plug 'tjdevries/colorbuddy.nvim'
 
 Plug 'neovim/nvim-lspconfig'
 
@@ -22,6 +24,7 @@ Plug 'tjdevries/colorbuddy.nvim', { 'branch': 'dev' }
 Plug 'jesseleite/nvim-noirbuddy'
 Plug 'alligator/accent.vim'
 Plug 'andreasvc/vim-256noir'
+Plug 'mcchrish/zenbones.nvim'
 
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
@@ -54,11 +57,11 @@ nnoremap q :nohlsearch<CR>
 let g:vimsyn_embed = 'l'
 
 let g:sonokai_style = 'default'
-let g:gruvbox_material_foreground = 'mix'
-let g:gruvbox_material_background = 'soft'
+let g:gruvbox_material_foreground = 'original'
+let g:gruvbox_material_background = 'hard'
 let g:everforest_background = 'default'
 let g:accent_colour = 'cyan'
-" colorscheme noirbuddy
+" colorscheme gruvbox-material
 
 lua << EOF
 require('nvim-treesitter.configs').setup {
@@ -114,13 +117,34 @@ require('lspconfig').rust_analyzer.setup {
     }
 }
 require('noirbuddy').setup {
-    preset = 'minimal'
+    colors = {
+        background = '#000000',
+        --primary = '#1abc9c'
+        --primary = '#00ff00',
+        --primary = '#00ffff'
+        primary = '#ffffff',
+        diagnostic_error = '#ffffff',
+        diagnostic_warning = '#ffffff',
+        diagnostic_info = '#ffffff',
+        diagnostic_hint = '#ffffff'
+    },
+    styles = {
+        italic = true,
+        bold = true,
+        underline = true,
+        undercurl = true,
+    }
 }
+local Color, colors, Group, groups, styles = require('colorbuddy').setup {}
+Group.new('Error', colors.primary)
+Group.new('ErrorMsg', colors_primary, colors.background)
+Group.new('@string', colors.primary, nil, styles.italic)
+Group.new('DiagnosticError', colors.diagnostic_error, nil, styles.bold + styles.italic)
+Group.new('DiagnosticWarn', colors.diagnostic_warning, nil, styles.bold + styles.italic)
+Group.new('DiagnosticInfo', colors.diagnostic_info, nil, styles.bold + styles.italic)
+Group.new('DiagnosticHint', colors.diagnostic_hint, nil, styles.bold + styles.italic)
 local noirbuddy_lualine = require('noirbuddy.plugins.lualine')
 require('lualine').setup {
-    options = {
-        theme = noirbuddy_lualine.theme
-    },
     sections = noirbuddy_lualine.sections,
     inactive_sections = noirbuddy_lualine.inactive_sections
 }
