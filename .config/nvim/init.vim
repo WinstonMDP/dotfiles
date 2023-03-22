@@ -1,6 +1,5 @@
 call plug#begin()
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'rktjmp/lush.nvim'
 Plug 'tjdevries/colorbuddy.nvim'
 
 Plug 'neovim/nvim-lspconfig'
