@@ -28,6 +28,8 @@ Plug 'mcchrish/zenbones.nvim'
 
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
+
+Plug 'lewis6991/gitsigns.nvim'
 call plug#end()
 
 syntax on
@@ -41,8 +43,6 @@ set softtabstop=4
 set expandtab
 set smarttab
 set scrolloff=3
-set background=dark
-" set completeopt-=preview
 
 function Fmt()
     !cargo fmt
@@ -54,21 +54,19 @@ autocmd BufWritePost *.tex !pdflatex %
 
 nnoremap q :nohlsearch<CR>
 
-let g:vimsyn_embed = 'l'
-
 let g:sonokai_style = 'default'
 let g:gruvbox_material_foreground = 'original'
 let g:gruvbox_material_background = 'hard'
 let g:everforest_background = 'default'
 let g:accent_colour = 'cyan'
-" colorscheme gruvbox-material
 
 lua << EOF
 require('nvim-treesitter.configs').setup {
-    highlight = {
-        enable = true
-    }
+    ensure_installed = { "rust", "toml", "latex", "bibtex", "lua", "markdown", "dockerfile", "vim" },
+    auto_install = true,
+    highlight = { enable = true }
 }
+require('gitsigns').setup()
 local cmp = require('cmp');
 cmp.setup {
     completion = {
@@ -119,10 +117,11 @@ require('lspconfig').rust_analyzer.setup {
 require('noirbuddy').setup {
     colors = {
         background = '#000000',
-        --primary = '#1abc9c'
+        --primary = '#1abc9c',
         --primary = '#00ff00',
-        --primary = '#00ffff'
+        --secondary = '#00ffff'
         primary = '#ffffff',
+        --secondary = '#ffffff',
         diagnostic_error = '#ffffff',
         diagnostic_warning = '#ffffff',
         diagnostic_info = '#ffffff',
@@ -132,7 +131,7 @@ require('noirbuddy').setup {
         italic = true,
         bold = true,
         underline = true,
-        undercurl = true,
+        undercurl = true
     }
 }
 local Color, colors, Group, groups, styles = require('colorbuddy').setup {}

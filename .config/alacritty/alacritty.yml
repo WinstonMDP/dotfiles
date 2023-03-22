@@ -1,6 +1,6 @@
 import:
   - ~/.config/alacritty/themes/themes/xterm.yaml
-# - ~/.config/alacritty/themes/themes/pencil_dark.yaml
+#  - ~/.config/alacritty/themes/themes/pencil_dark.yaml
 
 env:
   Term: alacritty
