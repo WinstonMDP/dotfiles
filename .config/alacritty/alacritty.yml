@@ -1,6 +1,5 @@
 import:
-  - ~/.config/alacritty/themes/themes/xterm.yaml
-#  - ~/.config/alacritty/themes/themes/pencil_dark.yaml
+  - ~/.config/alacritty/themes/themes/hyper.yaml
 
 env:
   Term: alacritty
@@ -8,8 +7,4 @@ env:
 font:
   normal:
     family: JetBrainsMono Nerd Font
-    #    family: JetBrains Mono
-    #    family: Source Code Pro
-    #    style: Medium
-    #    family: Menlo
   size: 13

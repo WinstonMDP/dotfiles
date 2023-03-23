@@ -29,6 +29,8 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 
 Plug 'lewis6991/gitsigns.nvim'
+
+Plug 'whonore/Coqtail'
 call plug#end()
 
 syntax on
