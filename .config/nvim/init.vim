@@ -21,8 +21,6 @@ Plug 'preservim/vim-colors-pencil'
 Plug 'mweisshaupt1988/neobeans.vim', { 'as': 'neobeans' }
 Plug 'tjdevries/colorbuddy.nvim', { 'branch': 'dev' }
 Plug 'jesseleite/nvim-noirbuddy'
-Plug 'alligator/accent.vim'
-Plug 'andreasvc/vim-256noir'
 Plug 'mcchrish/zenbones.nvim'
 
 Plug 'nvim-lualine/lualine.nvim'
@@ -118,11 +116,7 @@ require('lspconfig').rust_analyzer.setup {
 require('noirbuddy').setup {
     colors = {
         background = '#000000',
-        --primary = '#1abc9c',
-        --primary = '#00ff00',
-        --secondary = '#00ffff'
         primary = '#ffffff',
-        --secondary = '#ffffff',
         diagnostic_error = '#ffffff',
         diagnostic_warning = '#ffffff',
         diagnostic_info = '#ffffff',
@@ -135,7 +129,7 @@ require('noirbuddy').setup {
         undercurl = true
     }
 }
-local Color, colors, Group, groups, styles = require('colorbuddy').setup {}
+local Color, colors, Group, groups, styles = require('colorbuddy').setup()
 Group.new('Error', colors.primary)
 Group.new('ErrorMsg', colors_primary, colors.background)
 Group.new('@string', colors.primary, nil, styles.italic)
@@ -143,8 +137,13 @@ Group.new('DiagnosticError', colors.diagnostic_error, nil, styles.bold + styles.
 Group.new('DiagnosticWarn', colors.diagnostic_warning, nil, styles.bold + styles.italic)
 Group.new('DiagnosticInfo', colors.diagnostic_info, nil, styles.bold + styles.italic)
 Group.new('DiagnosticHint', colors.diagnostic_hint, nil, styles.bold + styles.italic)
+Group.new('CursorColumn', nil, colors.background)
+Group.new('CursorLine', nil, colors.background)
+Group.new('CursorLineNr', colors.background, colors.background)
+Group.new('Cursor', nil, colors.background)
 local noirbuddy_lualine = require('noirbuddy.plugins.lualine')
 require('lualine').setup {
+    options = { theme = noirbuddy_lualine.theme },
     sections = noirbuddy_lualine.sections,
     inactive_sections = noirbuddy_lualine.inactive_sections
 }
