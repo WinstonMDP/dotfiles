@@ -1,6 +1,7 @@
 call plug#begin()
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'tjdevries/colorbuddy.nvim'
+Plug 'rktjmp/lush.nvim'
 
 Plug 'neovim/nvim-lspconfig'
 
@@ -137,13 +138,8 @@ Group.new('DiagnosticError', colors.diagnostic_error, nil, styles.bold + styles.
 Group.new('DiagnosticWarn', colors.diagnostic_warning, nil, styles.bold + styles.italic)
 Group.new('DiagnosticInfo', colors.diagnostic_info, nil, styles.bold + styles.italic)
 Group.new('DiagnosticHint', colors.diagnostic_hint, nil, styles.bold + styles.italic)
-Group.new('CursorColumn', nil, colors.background)
-Group.new('CursorLine', nil, colors.background)
-Group.new('CursorLineNr', colors.background, colors.background)
-Group.new('Cursor', nil, colors.background)
-local noirbuddy_lualine = require('noirbuddy.plugins.lualine')
+local noirbuddy_lualine = require("noirbuddy.plugins.lualine")
 require('lualine').setup {
-    options = { theme = noirbuddy_lualine.theme },
     sections = noirbuddy_lualine.sections,
     inactive_sections = noirbuddy_lualine.inactive_sections
 }

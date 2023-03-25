@@ -8,3 +8,8 @@ font:
   normal:
     family: JetBrainsMono Nerd Font
   size: 13
+
+colors:
+  cursor:
+    text: '#000000'
+    cursor: '#ffffff'
