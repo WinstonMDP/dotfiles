@@ -2,6 +2,7 @@ call plug#begin()
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'tjdevries/colorbuddy.nvim'
 Plug 'rktjmp/lush.nvim'
+Plug 'nvim-lua/plenary.nvim'
 
 Plug 'neovim/nvim-lspconfig'
 
@@ -13,6 +14,11 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 
+Plug 'simrat39/rust-tools.nvim'
+Plug 'mfussenegger/nvim-dap'
+
+Plug 'whonore/Coqtail'
+
 Plug 'sainnhe/sonokai'
 Plug 'sainnhe/gruvbox-material'
 Plug 'sainnhe/everforest'
@@ -23,16 +29,23 @@ Plug 'mweisshaupt1988/neobeans.vim', { 'as': 'neobeans' }
 Plug 'tjdevries/colorbuddy.nvim', { 'branch': 'dev' }
 Plug 'jesseleite/nvim-noirbuddy'
 Plug 'mcchrish/zenbones.nvim'
+Plug 'ellisonleao/gruvbox.nvim'
 
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 
 Plug 'lewis6991/gitsigns.nvim'
 
-Plug 'whonore/Coqtail'
+Plug 'karb94/neoscroll.nvim'
+
+Plug 'numToStr/Comment.nvim'
+
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
 call plug#end()
 
 syntax on
+
+set spelllang=en,ru
 
 set termguicolors
 set encoding=utf-8
@@ -54,19 +67,26 @@ autocmd BufWritePost *.tex !pdflatex %
 
 nnoremap q :nohlsearch<CR>
 
-let g:sonokai_style = 'default'
-let g:gruvbox_material_foreground = 'original'
-let g:gruvbox_material_background = 'hard'
-let g:everforest_background = 'default'
-let g:accent_colour = 'cyan'
+let g:gruvbox_material_foreground = 'material'
+colorscheme gruvbox-material
 
 lua << EOF
 require('nvim-treesitter.configs').setup {
     ensure_installed = { "rust", "toml", "latex", "bibtex", "lua", "markdown", "dockerfile", "vim" },
     auto_install = true,
-    highlight = { enable = true }
+    highlight = { enable = true },
+    incremental_selection = { enable = true }
 }
-require('gitsigns').setup()
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>fg', builtin.grep_string, {})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>fr', builtin.registers, {})
+vim.keymap.set('n', '<leader>fk', builtin.keymaps, {})
+vim.keymap.set('n', '<leader>git', builtin.git_commits, {})
+vim.keymap.set('n', '<leader>gst', builtin.git_status, {})
+vim.keymap.set('n', '<leader>dig', builtin.diagnostics, {})
+require('gitsigns').setup{}
 local cmp = require('cmp');
 cmp.setup {
     completion = {
@@ -84,6 +104,10 @@ cmp.setup {
         ['<C-e>'] = cmp.mapping.abort(),
         ['<CR>'] = cmp.mapping.confirm({ select = false })
     },
+    window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+    },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
@@ -92,55 +116,46 @@ cmp.setup {
         { name = 'buffer' }
     })
 }
+local rt = require("rust-tools")
+local lspconfig = require('lspconfig')
 local on_attach = function(client, bufnr)
     local bufopts = { noremap=true, silent=true, buffer=bufnr }
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+    vim.keymap.set('n', 'gd', builtin.lsp_definitions, bufopts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+    vim.keymap.set('n', 'K', rt.hover_actions.hover_actions, bufopts)
     vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-    vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+    vim.keymap.set('n', '<space>ca', rt.code_action_group.code_action_group, bufopts)
 end
-require('lspconfig').rust_analyzer.setup {
-    on_attach = on_attach,
-    cmd = {'rustup', 'run', 'stable', 'rust-analyzer'},
-    capabilities = require('cmp_nvim_lsp').default_capabilities(),
-    settings = {
-        ["rust-analyzer"] = {
-            check = {
-                command = { "clippy" }
-            }
-        }
+rt.setup {
+    tools = { inlay_hints = { only_current_line = true } },
+    server = {
+        on_attach = on_attach,
+        cmd = {'rustup', 'run', 'stable', 'rust-analyzer'},
+        capabilities = require('cmp_nvim_lsp').default_capabilities{},
+        settings = { ["rust-analyzer"] = { check = { command = { "clippy" } } } }
     }
 }
-require('noirbuddy').setup {
-    colors = {
-        background = '#000000',
-        primary = '#ffffff',
-        diagnostic_error = '#ffffff',
-        diagnostic_warning = '#ffffff',
-        diagnostic_info = '#ffffff',
-        diagnostic_hint = '#ffffff'
-    },
-    styles = {
-        italic = true,
-        bold = true,
-        underline = true,
-        undercurl = true
-    }
-}
-local Color, colors, Group, groups, styles = require('colorbuddy').setup()
-Group.new('Error', colors.primary)
-Group.new('ErrorMsg', colors_primary, colors.background)
-Group.new('@string', colors.primary, nil, styles.italic)
-Group.new('DiagnosticError', colors.diagnostic_error, nil, styles.bold + styles.italic)
-Group.new('DiagnosticWarn', colors.diagnostic_warning, nil, styles.bold + styles.italic)
-Group.new('DiagnosticInfo', colors.diagnostic_info, nil, styles.bold + styles.italic)
-Group.new('DiagnosticHint', colors.diagnostic_hint, nil, styles.bold + styles.italic)
-local noirbuddy_lualine = require("noirbuddy.plugins.lualine")
-require('lualine').setup {
-    sections = noirbuddy_lualine.sections,
-    inactive_sections = noirbuddy_lualine.inactive_sections
-}
+local dap = require('dap')
+vim.keymap.set('n', '<leader>t', dap.toggle_breakpoint)
+vim.keymap.set('n', '<leader>cn', dap.continue)
+vim.keymap.set('n', '<leader>si', dap.step_into)
+vim.keymap.set('n', '<leader>so', dap.step_out)
+vim.keymap.set('n', '<leader>sv', dap.step_over)
+vim.keymap.set('n', '<Leader>dr', dap.repl.open)
+vim.keymap.set('n', '<Leader>dc', dap.repl.close)
+local dap_ui_widgets = require('dap.ui.widgets')
+vim.keymap.set({'n', 'v'}, '<Leader>dh', dap_ui_widgets.hover)
+vim.keymap.set({'n', 'v'}, '<Leader>dp', dap_ui_widgets.preview)
+vim.keymap.set('n', '<Leader>df', function()
+    dap_ui_widgets.centered_float(dap_ui_widgets.frames)
+end)
+vim.keymap.set('n', '<Leader>ds', function()
+    dap_ui_widgets.centered_float(dap_ui_widgets.scopes)
+end)
+lspconfig.texlab.setup{}
+require('lualine').setup{}
+require('neoscroll').setup()
+require('Comment').setup()
 EOF

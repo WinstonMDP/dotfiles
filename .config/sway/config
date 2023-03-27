@@ -209,18 +209,20 @@ bar {
     status_command while SWAYBAR_FIRST="$(cat /sys/class/power_supply/BAT0/capacity)" && SWAYBAR_SECOND="$(date +'%Y-%m-%d %I:%M:%S %p')" && echo "Capacity: $SWAYBAR_FIRST% $SWAYBAR_SECOND"; do sleep 1; done
 
     colors {
-        separator #ffffff
-        statusline #ffffff
         background #000000
-        focused_separator #ffffff
-        focused_statusline #ffffff
+        statusline #ffffff
+        separator #ffffff
         focused_background #000000
+        focused_statusline #ffffff
+        focused_separator #ffffff
         focused_workspace #ffffff #ffffff #000000
         active_workspace #000000 #000000 #ffffff
         inactive_workspace #000000 #000000 #ffffff
+        urgent_workspace #ffffff #ffffff #000000
+        binding_mode #ffffff #ffffff #000000
     }
 
-    font JetBrainsMono Nerd Font 9
+    font JetBrainsMono Nerd Font 10
 }
 
 default_border none
