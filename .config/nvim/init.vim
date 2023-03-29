@@ -45,6 +45,7 @@ call plug#end()
 
 syntax on
 
+set spell
 set spelllang=en,ru
 
 set termguicolors
@@ -55,7 +56,6 @@ set tabstop=4
 set softtabstop=4
 set expandtab
 set smarttab
-set scrolloff=3
 
 function Fmt()
     !cargo fmt
@@ -78,15 +78,15 @@ require('nvim-treesitter.configs').setup {
     incremental_selection = { enable = true }
 }
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.grep_string, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-vim.keymap.set('n', '<leader>fr', builtin.registers, {})
-vim.keymap.set('n', '<leader>fk', builtin.keymaps, {})
-vim.keymap.set('n', '<leader>git', builtin.git_commits, {})
-vim.keymap.set('n', '<leader>gst', builtin.git_status, {})
-vim.keymap.set('n', '<leader>dig', builtin.diagnostics, {})
+vim.keymap.set('n', '.ff', builtin.find_files, {})
+vim.keymap.set('n', '.fg', builtin.grep_string, {})
+vim.keymap.set('n', '.fb', builtin.buffers, {})
+vim.keymap.set('n', '.fh', builtin.help_tags, {})
+vim.keymap.set('n', '.fr', builtin.registers, {})
+vim.keymap.set('n', '.fk', builtin.keymaps, {})
+vim.keymap.set('n', '.git', builtin.git_commits, {})
+vim.keymap.set('n', '.gst', builtin.git_status, {})
+vim.keymap.set('n', '.dig', builtin.diagnostics, {})
 require('gitsigns').setup{}
 local cmp = require('cmp');
 cmp.setup {
@@ -99,10 +99,6 @@ cmp.setup {
         end
     },
     mapping = cmp.mapping.preset.insert {
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-leader>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.abort(),
         ['<CR>'] = cmp.mapping.confirm({ select = false })
     },
     window = {
@@ -121,11 +117,11 @@ local rt = require("rust-tools")
 local lspconfig = require('lspconfig')
 local on_attach = function(client, bufnr)
     local bufopts = { noremap=true, silent=true, buffer=bufnr }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-    vim.keymap.set('n', 'gd', builtin.lsp_definitions, bufopts)
-    vim.keymap.set('n', 'gi', builtin.lsp_implementations, bufopts)
-    vim.keymap.set('n', 'K', rt.hover_actions.hover_actions, bufopts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+    vim.keymap.set('n', '<leader>gD', vim.lsp.buf.declaration, bufopts)
+    vim.keymap.set('n', '<leader>gd', builtin.lsp_definitions, bufopts)
+    vim.keymap.set('n', '<leader>gi', builtin.lsp_implementations, bufopts)
+    vim.keymap.set('n', '<leader>K', rt.hover_actions.hover_actions, bufopts)
+    vim.keymap.set('n', '<leader><C-k>', vim.lsp.buf.signature_help, bufopts)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<leader>ca', rt.code_action_group.code_action_group, bufopts)
 end
@@ -135,7 +131,7 @@ rt.setup {
         on_attach = on_attach,
         cmd = {'rustup', 'run', 'stable', 'rust-analyzer'},
         capabilities = require('cmp_nvim_lsp').default_capabilities{},
-        settings = { ["rust-analyzer"] = { check = { command = { "clippy" } } } }
+        settings = { ["rust-analyzer"] = { check = { command = "clippy" } } }
     }
 }
 local dap = require('dap')
