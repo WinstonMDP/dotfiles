@@ -45,7 +45,8 @@ call plug#end()
 
 syntax on
 
-set spell
+autocmd FileType tex,markdown setlocal spell
+
 set spelllang=en,ru
 
 set termguicolors
