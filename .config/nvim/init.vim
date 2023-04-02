@@ -68,7 +68,6 @@ autocmd BufWritePost *.tex !pdflatex %
 
 nnoremap q :nohlsearch<CR>
 
-let g:gruvbox_material_foreground = 'material'
 colorscheme gruvbox-material
 
 lua << EOF
