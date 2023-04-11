@@ -99,7 +99,9 @@ cmp.setup {
         end
     },
     mapping = cmp.mapping.preset.insert {
-        ['<CR>'] = cmp.mapping.confirm({ select = false })
+        ['<CR>'] = cmp.mapping.confirm({ select = false }),
+        ['<S-Tab>'] = cmp.mapping.complete(),
+        ['<Tab>'] = cmp.mapping.select_next_item()
     },
     window = {
         completion = cmp.config.window.bordered(),
