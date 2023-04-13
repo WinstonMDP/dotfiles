@@ -91,7 +91,7 @@ require('gitsigns').setup{}
 local cmp = require('cmp');
 cmp.setup {
     completion = {
-        autocomplete = false
+        autocomplete = true
     },
     snippet = {
         expand = function(args)
