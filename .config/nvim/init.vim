@@ -58,13 +58,19 @@ set softtabstop=4
 set expandtab
 set smarttab
 
-function Fmt()
+function RustFmt()
     !cargo fmt
     call feedkeys("<CR>")
 endfunction
 
-autocmd BufWritePost *.rs call Fmt()
+function CppFmt()
+    !clang-format -i %
+    call feedkeys("<CR>")
+endfunction
+
+autocmd BufWritePost *.rs call RustFmt()
 autocmd BufWritePost *.tex !pdflatex %
+autocmd BufWritePost *.cpp call CppFmt()
 
 nnoremap q :nohlsearch<CR>
 
