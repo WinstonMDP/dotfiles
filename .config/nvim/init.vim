@@ -1,6 +1,5 @@
 call plug#begin()
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'tjdevries/colorbuddy.nvim'
 Plug 'rktjmp/lush.nvim'
 Plug 'nvim-lua/plenary.nvim'
 
@@ -26,8 +25,6 @@ Plug 'sainnhe/edge'
 Plug 'EdenEast/nightfox.nvim'
 Plug 'preservim/vim-colors-pencil'
 Plug 'mweisshaupt1988/neobeans.vim', { 'as': 'neobeans' }
-Plug 'tjdevries/colorbuddy.nvim', { 'branch': 'dev' }
-Plug 'jesseleite/nvim-noirbuddy'
 Plug 'mcchrish/zenbones.nvim'
 Plug 'ellisonleao/gruvbox.nvim'
 
@@ -78,11 +75,12 @@ colorscheme gruvbox-material
 
 lua << EOF
 require('nvim-treesitter.configs').setup {
-    ensure_installed = { "rust", "toml", "latex", "bibtex", "lua", "markdown", "dockerfile", "vim" },
+    ensure_installed = { "vim", "lua", "rust", "toml", "latex", "bibtex", "markdown", "dockerfile" },
     auto_install = true,
     highlight = { enable = true },
     incremental_selection = { enable = true }
 }
+
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '.ff', builtin.find_files, {})
 vim.keymap.set('n', '.fg', builtin.grep_string, {})
@@ -93,7 +91,9 @@ vim.keymap.set('n', '.fk', builtin.keymaps, {})
 vim.keymap.set('n', '.git', builtin.git_commits, {})
 vim.keymap.set('n', '.gst', builtin.git_status, {})
 vim.keymap.set('n', '.dig', builtin.diagnostics, {})
+
 require('gitsigns').setup{}
+
 local cmp = require('cmp');
 cmp.setup {
     completion = {
@@ -121,6 +121,7 @@ cmp.setup {
         { name = 'buffer' }
     })
 }
+
 local rt = require("rust-tools")
 local lspconfig = require('lspconfig')
 local on_attach = function(client, bufnr)
@@ -142,6 +143,7 @@ rt.setup {
         settings = { ["rust-analyzer"] = { check = { command = "clippy" } } }
     }
 }
+
 local dap = require('dap')
 vim.keymap.set('n', '<leader>dt', dap.toggle_breakpoint)
 vim.keymap.set('n', '<leader>dcn', dap.continue)
@@ -159,6 +161,7 @@ end)
 vim.keymap.set('n', '<leader>ds', function()
     dap_ui_widgets.centered_float(dap_ui_widgets.scopes)
 end)
+
 lspconfig.texlab.setup{}
 require('lualine').setup{}
 require('neoscroll').setup()
