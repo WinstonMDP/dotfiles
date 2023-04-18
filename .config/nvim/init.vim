@@ -45,7 +45,6 @@ syntax on
 autocmd FileType tex,markdown setlocal spell
 
 set spelllang=en,ru
-
 set termguicolors
 set encoding=utf-8
 set autoindent
@@ -54,6 +53,8 @@ set tabstop=4
 set softtabstop=4
 set expandtab
 set smarttab
+
+let g:netrw_banner=0
 
 function RustFmt()
     !cargo fmt
@@ -67,6 +68,7 @@ endfunction
 
 autocmd BufWritePost *.rs call RustFmt()
 autocmd BufWritePost *.tex !pdflatex %
+autocmd BufWritePost *.md !pandoc -f markdown --pdf-engine=xelatex -V mainfont="JetBrainsMono Nerd Font" -o %:r.pdf %
 autocmd BufWritePost *.cpp call CppFmt()
 
 nnoremap q :nohlsearch<CR>
@@ -84,6 +86,7 @@ require('nvim-treesitter.configs').setup {
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '.ff', builtin.find_files, {})
 vim.keymap.set('n', '.fg', builtin.grep_string, {})
+vim.keymap.set('n', '.fl', builtin.live_grep, {})
 vim.keymap.set('n', '.fb', builtin.buffers, {})
 vim.keymap.set('n', '.fh', builtin.help_tags, {})
 vim.keymap.set('n', '.fr', builtin.registers, {})
