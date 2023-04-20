@@ -54,8 +54,6 @@ set softtabstop=4
 set expandtab
 set smarttab
 
-let g:netrw_banner=0
-
 function RustFmt()
     !cargo fmt
     call feedkeys("<CR>")
