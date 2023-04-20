@@ -83,6 +83,7 @@ require('nvim-treesitter.configs').setup {
     incremental_selection = { enable = true }
 }
 
+require('telescope').setup { defaults = { file_ignore_patterns = { "%.pdf" } } }
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '.ff', builtin.find_files, {})
 vim.keymap.set('n', '.fg', builtin.grep_string, {})
