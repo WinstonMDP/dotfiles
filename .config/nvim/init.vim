@@ -53,6 +53,8 @@ set tabstop=4
 set softtabstop=4
 set expandtab
 set smarttab
+set number
+set relativenumber
 
 function RustFmt()
     !cargo fmt
@@ -67,7 +69,7 @@ endfunction
 autocmd BufWritePost *.rs call RustFmt()
 autocmd BufWritePost *.tex !pdflatex -output-directory %:p:h %
 autocmd BufWritePost *.md !pandoc -f markdown --pdf-engine=xelatex -V mainfont="JetBrainsMono Nerd Font" -o %:r.pdf %
-autocmd BufWritePost *.cpp call CppFmt()
+autocmd BufWritePost *.cpp,*.h call CppFmt()
 
 nnoremap q :nohlsearch<CR>
 
