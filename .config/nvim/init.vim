@@ -92,6 +92,7 @@ vim.keymap.set('n', '.fb', builtin.buffers, {})
 vim.keymap.set('n', '.fr', builtin.registers, {})
 vim.keymap.set('n', '.git', builtin.git_commits, {})
 vim.keymap.set('n', '.gst', builtin.git_status, {})
+vim.keymap.set('n', '.di', builtin.diagnostics, {})
 
 require('gitsigns').setup{}
 
@@ -122,6 +123,9 @@ cmp.setup {
         { name = 'buffer' }
     })
 }
+
+vim.keymap.set('n', '<leader>di', vim.diagnostic.open_float)
+vim.diagnostic.config { float = { border = "single" } }
 
 local rt = require("rust-tools")
 local lspconfig = require('lspconfig')
