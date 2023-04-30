@@ -55,6 +55,8 @@ set expandtab
 set smarttab
 set number
 set relativenumber
+set listchars=trail:~,tab:>-,nbsp:+
+set list
 
 function RustFmt()
     !cargo fmt
