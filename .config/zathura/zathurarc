@@ -31,4 +31,6 @@ set completion-highlight-bg     "#83a598"
 set recolor-lightcolor          "#282828"
 set recolor-darkcolor           "#ebdbb2"
 
+set recolor                     "true"
+
 set font "JetBrainsMono Nerd Font 12"

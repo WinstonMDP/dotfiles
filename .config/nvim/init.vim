@@ -27,6 +27,7 @@ Plug 'preservim/vim-colors-pencil'
 Plug 'mweisshaupt1988/neobeans.vim', { 'as': 'neobeans' }
 Plug 'mcchrish/zenbones.nvim'
 Plug 'ellisonleao/gruvbox.nvim'
+Plug 'shaunsingh/nord.nvim'
 
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
