@@ -59,6 +59,9 @@ set relativenumber
 set listchars=trail:~,tab:>-,nbsp:+
 set list
 
+let g:netrw_banner=0
+let g:netrw_liststyle=3
+
 function RustFmt()
     !cargo fmt
     call feedkeys("<CR>")
