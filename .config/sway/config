@@ -194,6 +194,7 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
+
 bindsym $mod+r mode "resize"
 
 #
@@ -201,6 +202,8 @@ bindsym $mod+r mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
+    id bar1
+    mode invisible
     position top
 
     # When the status_command prints a new line to stdout, swaybar updates.
@@ -223,7 +226,11 @@ bar {
     }
 
     font JetBrainsMono Nerd Font 10
-}
+
+    }
+
+bindsym $mod+o bar bar1 mode dock
+bindsym $mod+p bar bar1 mode invisible
 
 default_border none
 

@@ -2,6 +2,7 @@ call plug#begin()
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'rktjmp/lush.nvim'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
 
 Plug 'neovim/nvim-lspconfig'
 
@@ -30,7 +31,6 @@ Plug 'ellisonleao/gruvbox.nvim'
 Plug 'shaunsingh/nord.nvim'
 
 Plug 'nvim-lualine/lualine.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
 
 Plug 'lewis6991/gitsigns.nvim'
 
@@ -79,7 +79,7 @@ autocmd BufWritePost *.cpp,*.h call CppFmt()
 
 nnoremap q :nohlsearch<CR>
 
-colorscheme gruvbox-material
+colorscheme nord
 
 lua << EOF
 require('nvim-treesitter.configs').setup {
