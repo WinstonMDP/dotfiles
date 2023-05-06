@@ -174,7 +174,7 @@ vim.keymap.set('n', '<leader>ds', function()
 end)
 
 lspconfig.texlab.setup{}
-require('lualine').setup{}
+require('lualine').setup()
 require('neoscroll').setup()
 require('Comment').setup()
 EOF
