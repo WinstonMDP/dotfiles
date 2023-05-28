@@ -31,6 +31,9 @@ Plug 'mcchrish/zenbones.nvim'
 Plug 'ellisonleao/gruvbox.nvim'
 Plug 'shaunsingh/nord.nvim'
 
+Plug 'tjdevries/colorbuddy.nvim', { 'branch': 'dev' }
+Plug 'jesseleite/nvim-noirbuddy'
+
 Plug 'nvim-lualine/lualine.nvim'
 
 Plug 'lewis6991/gitsigns.nvim'
@@ -80,8 +83,6 @@ autocmd BufWritePost *.cpp,*.h call CppFmt()
 
 nnoremap q :nohlsearch<CR>
 
-colorscheme nord
-
 lua << EOF
 require('nvim-treesitter.configs').setup({
     ensure_installed = { "vim", "lua", "rust", "toml", "latex", "bibtex", "markdown", "dockerfile" },
@@ -89,6 +90,17 @@ require('nvim-treesitter.configs').setup({
     highlight = { enable = true },
     incremental_selection = { enable = true }
 })
+
+require('noirbuddy').setup({
+    colors = {
+        background = '#000000',
+        primary = '#ffffff'
+    }
+})
+local Color, colors, Group, groups, styles = require('colorbuddy').setup({})
+Group.new('ErrorMsg', colors_primary, colors.background)
+Group.new('SpellBad', colors.diagnostic_error)
+Group.new('SpellRare', colors.diagnostic_warning)
 
 -- local cmp = require('cmp')
 -- cmp.setup({
@@ -173,7 +185,14 @@ vim.keymap.set('n', '<leader>ds', function()
 end)
 
 lspconfig.texlab.setup({})
-require('lualine').setup()
+
+require('lualine').setup({
+    options = {
+        section_separators = '',
+        component_separators = ''
+    }
+})
+
 require('neoscroll').setup()
 require('Comment').setup()
 EOF
