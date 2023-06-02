@@ -234,6 +234,8 @@ bindsym $mod+p bar bar1 mode invisible
 
 default_border none
 
+focus_follows_mouse no
+
 input "type:keyboard" {
     xkb_layout us,ru
     xkb_options grp:alt_shift_toggle

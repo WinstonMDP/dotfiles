@@ -6,14 +6,14 @@ Plug 'kyazdani42/nvim-web-devicons'
 
 Plug 'neovim/nvim-lspconfig'
 
-" Plug 'hrsh7th/cmp-nvim-lsp'
-" Plug 'hrsh7th/cmp-buffer'
-" Plug 'hrsh7th/cmp-path'
-" Plug 'hrsh7th/cmp-cmdline'
-" Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
 
-" Plug 'L3MON4D3/LuaSnip'
-" Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
 
 Plug 'simrat39/rust-tools.nvim'
 Plug 'mfussenegger/nvim-dap'
@@ -81,7 +81,7 @@ autocmd BufWritePost *.tex !pdflatex -output-directory %:p:h %
 autocmd BufWritePost *.md !pandoc -f markdown --pdf-engine=xelatex -V mainfont="JetBrainsMono Nerd Font" -o %:r.pdf %
 autocmd BufWritePost *.cpp,*.h call CppFmt()
 
-nnoremap q :nohlsearch<CR>
+nnoremap <ESC> :nohlsearch<CR>
 
 lua << EOF
 require('nvim-treesitter.configs').setup({
@@ -102,33 +102,31 @@ Group.new('ErrorMsg', colors_primary, colors.background)
 Group.new('SpellBad', colors.diagnostic_error)
 Group.new('SpellRare', colors.diagnostic_warning)
 
--- local cmp = require('cmp')
--- cmp.setup({
---     completion = {
---         autocomplete = true
---     },
---     snippet = {
---         expand = function(args)
---             require('luasnip').lsp_expand(args.body)
---         end
---     },
---     mapping = cmp.mapping.preset.insert({
---         ['<CR>'] = cmp.mapping.confirm({ select = false }),
---         ['<S-Tab>'] = cmp.mapping.complete(),
---         ['<Tab>'] = cmp.mapping.select_next_item()
---     }),
---     window = {
---         completion = cmp.config.window.bordered(),
---         documentation = cmp.config.window.bordered(),
---     },
---     sources = cmp.config.sources({
---         { name = 'nvim_lsp' },
---         { name = 'luasnip' },
---         { name = "path" }
---     }, {
---         { name = 'buffer' }
---     })
--- })
+local cmp = require('cmp')
+cmp.setup({
+    completion = { autocomplete = false },
+    snippet = {
+        expand = function(args)
+            require('luasnip').lsp_expand(args.body)
+        end
+    },
+    mapping = cmp.mapping.preset.insert({
+        ['<CR>'] = cmp.mapping.confirm({ select = false }),
+        ['<S-Tab>'] = cmp.mapping.complete(),
+        ['<Tab>'] = cmp.mapping.select_next_item()
+    }),
+    window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+    },
+    sources = cmp.config.sources({
+        { name = 'nvim_lsp' },
+        { name = 'luasnip' },
+        { name = "path" }
+    }, {
+        { name = 'buffer' }
+    })
+})
 
 require('telescope').setup({ defaults = { file_ignore_patterns = { "%.pdf" } } })
 local builtin = require('telescope.builtin')
@@ -163,7 +161,7 @@ rt.setup({
     server = {
         on_attach = on_attach,
         cmd = {'rustup', 'run', 'stable', 'rust-analyzer'},
-        --capabilities = require('cmp_nvim_lsp').default_capabilities{},
+        capabilities = require('cmp_nvim_lsp').default_capabilities{},
         settings = { ["rust-analyzer"] = { check = { command = "clippy" } } }
     }
 })
