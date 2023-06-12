@@ -144,8 +144,9 @@ require('gitsigns').setup({})
 vim.keymap.set('n', '<leader>di', vim.diagnostic.open_float)
 vim.diagnostic.config({ float = { border = "single" } })
 
-local rt = require("rust-tools")
 local lspconfig = require('lspconfig')
+
+local rt = require("rust-tools")
 local on_attach = function(client, bufnr)
     local bufopts = { noremap=true, silent=true, buffer=bufnr }
     vim.keymap.set('n', '<leader>gD', vim.lsp.buf.declaration, bufopts)
