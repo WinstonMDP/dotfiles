@@ -62,6 +62,7 @@ set number
 set relativenumber
 set listchars=trail:~,tab:>-,nbsp:+
 set list
+set scrolloff=4
 
 let g:netrw_banner=0
 let g:netrw_liststyle=3
