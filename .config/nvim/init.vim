@@ -38,8 +38,6 @@ Plug 'nvim-lualine/lualine.nvim'
 
 Plug 'lewis6991/gitsigns.nvim'
 
-Plug 'karb94/neoscroll.nvim'
-
 Plug 'numToStr/Comment.nvim'
 
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
@@ -194,6 +192,5 @@ require('lualine').setup({
     }
 })
 
-require('neoscroll').setup()
 require('Comment').setup()
 EOF
