@@ -47,7 +47,7 @@ syntax on
 
 autocmd FileType tex,markdown setlocal spell
 
-set spelllang=en,ru
+set spelllang=en,ru,de
 set termguicolors
 set encoding=utf-8
 set autoindent
@@ -79,8 +79,6 @@ autocmd BufWritePost *.rs call RustFmt()
 autocmd BufWritePost *.tex !pdflatex -output-directory %:p:h %
 autocmd BufWritePost *.md !pandoc -f markdown --pdf-engine=xelatex -V mainfont="JetBrainsMono Nerd Font" -o %:r.pdf %
 autocmd BufWritePost *.cpp,*.h call CppFmt()
-
-nnoremap <ESC> :nohlsearch<CR>
 
 lua << EOF
 require('nvim-treesitter.configs').setup({
