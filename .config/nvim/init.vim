@@ -36,8 +36,6 @@ Plug 'jesseleite/nvim-noirbuddy'
 
 Plug 'nvim-lualine/lualine.nvim'
 
-Plug 'lewis6991/gitsigns.nvim'
-
 Plug 'numToStr/Comment.nvim'
 
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
@@ -137,8 +135,6 @@ vim.keymap.set('n', '.fr', builtin.registers, {})
 vim.keymap.set('n', '.git', builtin.git_commits, {})
 vim.keymap.set('n', '.gst', builtin.git_status, {})
 vim.keymap.set('n', '.di', builtin.diagnostics, {})
-
-require('gitsigns').setup({})
 
 vim.keymap.set('n', '<leader>di', vim.diagnostic.open_float)
 vim.diagnostic.config({ float = { border = "single" } })
