@@ -153,15 +153,19 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<leader>ca', rt.code_action_group.code_action_group, bufopts)
 end
 rt.setup({
-    tools = { inlay_hints = { only_current_line = true } },
+    tools = {
+        inlay_hints = { only_current_line = true },
+        hover_actions = { auto_focus = true }
+    },
     server = {
         on_attach = on_attach,
         cmd = {'rustup', 'run', 'stable', 'rust-analyzer'},
         capabilities = require('cmp_nvim_lsp').default_capabilities{},
-        settings = { ["rust-analyzer"] = { check = { command = "clippy" } } }
+        settings = { ["rust-analyzer"] = { check = { command = "clippy" } } },
     }
 })
-local dap = require('dap') vim.keymap.set('n', '<leader>dt', dap.toggle_breakpoint)
+local dap = require('dap')
+vim.keymap.set('n', '<leader>dt', dap.toggle_breakpoint)
 vim.keymap.set('n', '<leader>dcn', dap.continue)
 vim.keymap.set('n', '<leader>dsi', dap.step_into)
 vim.keymap.set('n', '<leader>dso', dap.step_out)
