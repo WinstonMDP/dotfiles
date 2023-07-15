@@ -236,7 +236,7 @@ focus_follows_mouse no
 
 input "type:keyboard" {
     xkb_layout us,ru
-    xkb_options grp:alt_shift_toggle
+    xkb_options grp:alt_shift_toggle,compose:ralt
 }
 
 bindsym Print exec grim ~/other/screenshots/screen-"$(date +%s)".png

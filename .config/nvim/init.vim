@@ -18,8 +18,6 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'simrat39/rust-tools.nvim'
 Plug 'mfussenegger/nvim-dap'
 
-Plug 'whonore/Coqtail'
-
 Plug 'sainnhe/sonokai'
 Plug 'sainnhe/gruvbox-material'
 Plug 'sainnhe/everforest'
@@ -63,6 +61,8 @@ set scrolloff=4
 let g:netrw_banner=0
 let g:netrw_liststyle=3
 
+let g:nvim_agda_settings = { "agda":"/usr/bin/agda-mode" }
+
 function RustFmt()
     !cargo fmt
     call feedkeys("<CR>")
@@ -80,7 +80,7 @@ autocmd BufWritePost *.cpp,*.h call CppFmt()
 
 lua << EOF
 require('nvim-treesitter.configs').setup({
-    ensure_installed = { "vim", "lua", "rust", "toml", "latex", "bibtex", "markdown", "dockerfile" },
+    ensure_installed = { "vim", "lua", "rust", "toml", "latex", "bibtex", "markdown", "dockerfile", "agda" },
     auto_install = true,
     highlight = { enable = true },
     incremental_selection = { enable = true }
