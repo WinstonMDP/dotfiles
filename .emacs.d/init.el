@@ -4,6 +4,9 @@
 (package-initialize)
 (require 'evil)
 (evil-mode 1)
-
+(evil-set-undo-system 'undo-redo)
 (load-file (let ((coding-system-for-read 'utf-8))
                 (shell-command-to-string "agda-mode locate")))
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq indent-line-function 'insert-tab)
