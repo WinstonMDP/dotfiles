@@ -10,3 +10,5 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 (setq indent-line-function 'insert-tab)
+(add-hook 'agda2-mode-hook
+     (lambda () (define-key agda2-mode-map (kbd "C-c C-g") 'agda2-show-constraints)))
