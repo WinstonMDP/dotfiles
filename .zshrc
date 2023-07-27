@@ -22,3 +22,5 @@ SOBOLE_THEME_MODE=dark
 
 # Tell Antigen that you're done.
 antigen apply
+
+export VISUAL=nvim

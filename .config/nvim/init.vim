@@ -37,6 +37,8 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'numToStr/Comment.nvim'
 
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
+
+Plug 'folke/which-key.nvim'
 call plug#end()
 
 syntax on
@@ -192,4 +194,5 @@ require('lualine').setup({
 })
 
 require('Comment').setup()
+require("which-key").setup{ triggers = "" }
 EOF
