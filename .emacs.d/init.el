@@ -22,6 +22,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(agda2-information-window-max-height 0.25)
  '(custom-safe-themes
    '("ccdc42b444da0b62c25850da75f59186319ee22ddfd153ffc9f7eb4e59652fc9" default))
  '(package-selected-packages '(the-matrix-theme evil)))
