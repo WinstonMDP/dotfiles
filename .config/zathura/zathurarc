@@ -1,3 +1,4 @@
 set recolor                     "true"
 set font                        "JetBrainsMono Nerd Font 12"
 set guioptions                  none
+set show-recent                 0
