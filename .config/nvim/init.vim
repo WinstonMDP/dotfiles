@@ -18,6 +18,8 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'simrat39/rust-tools.nvim'
 Plug 'mfussenegger/nvim-dap'
 
+Plug 'whonore/Coqtail'
+
 Plug 'sainnhe/sonokai'
 Plug 'sainnhe/gruvbox-material'
 Plug 'sainnhe/everforest'
@@ -75,7 +77,6 @@ endfunction
 
 autocmd BufWritePost *.rs call RustFmt()
 autocmd BufWritePost *.tex !pdflatex -output-directory %:p:h %
-autocmd BufWritePost *.md !pandoc -f markdown --pdf-engine=xelatex -V mainfont="JetBrainsMono Nerd Font" -o %:r.pdf %
 autocmd BufWritePost *.cpp,*.h call CppFmt()
 
 lua << EOF
@@ -163,19 +164,20 @@ rt.setup({
 })
 local dap = require('dap')
 vim.keymap.set('n', '<leader>dt', dap.toggle_breakpoint, { desc = "toggle breakpoint " })
-vim.keymap.set('n', '<leader>dcn', dap.continue, { desc = "continue" })
+vim.keymap.set('n', '<leader>dn', dap.continue, { desc = "continue" })
 vim.keymap.set('n', '<leader>dsi', dap.step_into, { desc = "step into" })
 vim.keymap.set('n', '<leader>dso', dap.step_out, { desc = "step out" })
 vim.keymap.set('n', '<leader>dsv', dap.step_over, { desc = "step over"})
 vim.keymap.set('n', '<leader>do', dap.repl.open, { desc = "dap open" })
 vim.keymap.set('n', '<leader>dc', dap.repl.close, { desc = "dap close" })
+vim.keymap.set('n', '<leader>dq', dap.terminate, { desc = "dap terminate" })
 local dap_ui_widgets = require('dap.ui.widgets')
 vim.keymap.set({'n', 'v'}, '<leader>dh', dap_ui_widgets.hover, { desc = "dap hover" })
 vim.keymap.set({'n', 'v'}, '<leader>dp', dap_ui_widgets.preview, { desc = "dap preview" })
 vim.keymap.set('n', '<leader>df', function()
     dap_ui_widgets.centered_float(dap_ui_widgets.frames)
 end, { desc = "dap frames" })
-vim.keymap.set('n', '<leader>ds', function()
+vim.keymap.set('n', '<leader>dsc', function()
     dap_ui_widgets.centered_float(dap_ui_widgets.scopes)
 end, { desc = "dap scopes" })
 
