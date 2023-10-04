@@ -100,7 +100,6 @@ Group.new('SpellRare', colors.diagnostic_warning)
 
 local cmp = require('cmp')
 cmp.setup({
-    completion = { autocomplete = false },
     snippet = {
         expand = function(args)
             require('luasnip').lsp_expand(args.body)
@@ -123,8 +122,12 @@ cmp.setup({
         { name = "path" }
     }, {
         { name = 'buffer' }
-    })
+    }),
+    experimental = {
+        ghost_text = true,
+    }
 })
+local my_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 require('telescope').setup({ defaults = { file_ignore_patterns = { "%.pdf" } } })
 local builtin = require('telescope.builtin')
@@ -181,7 +184,9 @@ vim.keymap.set('n', '<leader>dsc', function()
     dap_ui_widgets.centered_float(dap_ui_widgets.scopes)
 end, { desc = "dap scopes" })
 
-lspconfig.texlab.setup({})
+lspconfig.texlab.setup({
+    capabilities = my_capabilities
+})
 
 require('lualine').setup({
     options = {
