@@ -20,6 +20,13 @@ Plug 'mfussenegger/nvim-dap'
 
 Plug 'whonore/Coqtail'
 
+Plug 'tpope/vim-repeat'
+
+Plug 'ggandor/leap.nvim'
+
+Plug 'tjdevries/colorbuddy.nvim', { 'branch': 'dev' }
+Plug 'jesseleite/nvim-noirbuddy'
+
 Plug 'sainnhe/sonokai'
 Plug 'sainnhe/gruvbox-material'
 Plug 'sainnhe/everforest'
@@ -30,9 +37,9 @@ Plug 'mweisshaupt1988/neobeans.vim', { 'as': 'neobeans' }
 Plug 'mcchrish/zenbones.nvim'
 Plug 'ellisonleao/gruvbox.nvim'
 Plug 'shaunsingh/nord.nvim'
-
-Plug 'tjdevries/colorbuddy.nvim', { 'branch': 'dev' }
-Plug 'jesseleite/nvim-noirbuddy'
+Plug 'Mofiqul/dracula.nvim'
+Plug 'ishan9299/nvim-solarized-lua'
+Plug 'rafamadriz/neon'
 
 Plug 'nvim-lualine/lualine.nvim'
 
@@ -61,9 +68,13 @@ set relativenumber
 set listchars=trail:~,tab:>-,nbsp:+
 set list
 set scrolloff=4
+set nowrap
 
 let g:netrw_banner=0
 let g:netrw_liststyle=3
+
+let g:gruvbox_material_background='hard'
+let g:gruvbox_material_foreground='mix'
 
 function RustFmt()
     !cargo fmt
@@ -86,6 +97,8 @@ require('nvim-treesitter.configs').setup({
     highlight = { enable = true },
     incremental_selection = { enable = true }
 })
+
+require('leap').add_default_mappings()
 
 require('noirbuddy').setup({
     colors = {
