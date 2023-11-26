@@ -4,7 +4,11 @@ Plug 'rktjmp/lush.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
+
+Plug 'mfussenegger/nvim-lint'
 
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
@@ -15,7 +19,6 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 
-Plug 'simrat39/rust-tools.nvim'
 Plug 'mfussenegger/nvim-dap'
 
 Plug 'whonore/Coqtail'
@@ -40,14 +43,19 @@ Plug 'shaunsingh/nord.nvim'
 Plug 'Mofiqul/dracula.nvim'
 Plug 'ishan9299/nvim-solarized-lua'
 Plug 'rafamadriz/neon'
+Plug 'rose-pine/neovim'
 
 Plug 'nvim-lualine/lualine.nvim'
 
 Plug 'numToStr/Comment.nvim'
 
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.2' }
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
 
 Plug 'folke/which-key.nvim'
+
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
+Plug 'folke/todo-comments.nvim'
 call plug#end()
 
 syntax on
@@ -90,15 +98,18 @@ autocmd BufWritePost *.rs call RustFmt()
 autocmd BufWritePost *.tex !pdflatex -output-directory %:p:h %
 autocmd BufWritePost *.cpp,*.h call CppFmt()
 
+au BufWritePost * lua require('lint').try_lint()
+
 lua << EOF
 require('nvim-treesitter.configs').setup({
-    ensure_installed = { "vim", "lua", "rust", "toml", "latex", "bibtex", "markdown", "dockerfile", "agda" },
     auto_install = true,
     highlight = { enable = true },
     incremental_selection = { enable = true }
 })
 
-require('leap').add_default_mappings()
+local leap = require('leap')
+leap.add_default_mappings()
+leap.opts.safe_labels = {}
 
 require('noirbuddy').setup({
     colors = {
@@ -111,12 +122,17 @@ Group.new('ErrorMsg', colors_primary, colors.background)
 Group.new('SpellBad', colors.diagnostic_error)
 Group.new('SpellRare', colors.diagnostic_warning)
 
+require("mason").setup()
+require("mason-lspconfig").setup()
+
+require('lint').linters_by_ft = { markdown = { 'markdownlint' } }
+
 local cmp = require('cmp')
 cmp.setup({
     snippet = {
         expand = function(args)
             require('luasnip').lsp_expand(args.body)
-        end
+        end,
     },
     mapping = cmp.mapping.preset.insert({
         ['<C-Space>'] = cmp.mapping.complete(),
@@ -124,15 +140,12 @@ cmp.setup({
         ['<S-Tab>'] = cmp.mapping.select_prev_item(),
         ['<C-e>'] = cmp.mapping.abort(),
         ['<CR>'] = cmp.mapping.confirm({ select = false }),
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4)
     }),
-    window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
-    },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
-        { name = "path" }
     }, {
         { name = 'buffer' }
     }),
@@ -140,9 +153,13 @@ cmp.setup({
         ghost_text = true,
     }
 })
+
+require('todo-comments').setup()
+
 local my_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-require('telescope').setup({ defaults = { file_ignore_patterns = { "%.pdf" } } })
+local telescope = require('telescope')
+telescope.setup({ defaults = { file_ignore_patterns = { "%.pdf" } } })
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '.ff', builtin.find_files, { desc = "find files" })
 vim.keymap.set('n', '.fl', builtin.live_grep, { desc = "search input string, respecting .gitignore" })
@@ -151,33 +168,27 @@ vim.keymap.set('n', '.git', builtin.git_commits, { desc = "commits" })
 vim.keymap.set('n', '.gst', builtin.git_status, { desc = "git status" })
 vim.keymap.set('n', '.di', builtin.diagnostics, { desc = "diagnostics" })
 
+vim.keymap.set('n', '.td', require("telescope._extensions.todo-comments").exports.todo, { desc = "todo-comments" })
+
 vim.keymap.set('n', '<leader>di', vim.diagnostic.open_float, { desc = "open diagnostic in float" })
-vim.diagnostic.config({ float = { border = "single" } })
 
 local lspconfig = require('lspconfig')
 
-local rt = require("rust-tools")
-local on_attach = function(client, bufnr)
-    vim.keymap.set('n', '<leader>gD', vim.lsp.buf.declaration, { desc = "go to declaration" })
-    vim.keymap.set('n', '<leader>gd', builtin.lsp_definitions, { desc = "definitions" })
-    vim.keymap.set('n', '<leader>gi', builtin.lsp_implementations, { desc = "implementations" })
-    vim.keymap.set('n', '<leader>K', rt.hover_actions.hover_actions, { desc = "hover actions" })
-    vim.keymap.set('n', '<leader><C-k>', vim.lsp.buf.signature_help, { desc = "signature help" })
-    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = "rename" })
-    vim.keymap.set('n', '<leader>ca', rt.code_action_group.code_action_group, { desc = "code action" })
-end
-rt.setup({
-    tools = {
-        inlay_hints = { only_current_line = true },
-        hover_actions = { auto_focus = true }
-    },
-    server = {
-        on_attach = on_attach,
-        cmd = {'rustup', 'run', 'stable', 'rust-analyzer'},
-        capabilities = require('cmp_nvim_lsp').default_capabilities{},
-        settings = { ["rust-analyzer"] = { check = { command = "clippy" } } },
-    }
+vim.keymap.set('n', '<leader>gD', vim.lsp.buf.declaration, { desc = "go to declaration" })
+vim.keymap.set('n', '<leader>gd', builtin.lsp_definitions, { desc = "definitions" })
+vim.keymap.set('n', '<leader>gi', builtin.lsp_implementations, { desc = "implementations" })
+vim.keymap.set('n', '<leader>gr', builtin.lsp_references, { desc = "references" })
+vim.keymap.set('n', '<leader>K', vim.lsp.buf.hover, { desc = "hover actions" })
+vim.keymap.set('n', '<leader><C-k>', vim.lsp.buf.signature_help, { desc = "signature help" })
+vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = "rename" })
+vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = "code action" })
+
+lspconfig.rust_analyzer.setup({
+    cmd = {'rustup', 'run', 'stable', 'rust-analyzer'},
+    capabilities = require('cmp_nvim_lsp').default_capabilities{},
+    settings = { ["rust-analyzer"] = { check = { command = "clippy" } } },
 })
+
 local dap = require('dap')
 vim.keymap.set('n', '<leader>dt', dap.toggle_breakpoint, { desc = "toggle breakpoint " })
 vim.keymap.set('n', '<leader>dn', dap.continue, { desc = "continue" })
