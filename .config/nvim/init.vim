@@ -16,7 +16,7 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 
-Plug 'L3MON4D3/LuaSnip'
+Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
 Plug 'saadparwaiz1/cmp_luasnip'
 
 Plug 'mfussenegger/nvim-dap'
@@ -30,8 +30,8 @@ Plug 'ggandor/leap.nvim'
 Plug 'tjdevries/colorbuddy.nvim', { 'branch': 'dev' }
 Plug 'jesseleite/nvim-noirbuddy'
 
-Plug 'sainnhe/sonokai'
 Plug 'sainnhe/gruvbox-material'
+Plug 'sainnhe/sonokai'
 Plug 'sainnhe/everforest'
 Plug 'sainnhe/edge'
 Plug 'EdenEast/nightfox.nvim'
@@ -44,6 +44,7 @@ Plug 'Mofiqul/dracula.nvim'
 Plug 'ishan9299/nvim-solarized-lua'
 Plug 'rafamadriz/neon'
 Plug 'rose-pine/neovim'
+Plug 'folke/tokyonight.nvim'
 
 Plug 'nvim-lualine/lualine.nvim'
 
@@ -127,11 +128,13 @@ require("mason-lspconfig").setup()
 
 require('lint').linters_by_ft = { markdown = { 'markdownlint' } }
 
+luasnip = require('luasnip')
+
 local cmp = require('cmp')
 cmp.setup({
     snippet = {
         expand = function(args)
-            require('luasnip').lsp_expand(args.body)
+            luasnip.lsp_expand(args.body)
         end,
     },
     mapping = cmp.mapping.preset.insert({
@@ -153,6 +156,9 @@ cmp.setup({
         ghost_text = true,
     }
 })
+
+vim.keymap.set({"i", "s"}, "<C-J>", function() luasnip.jump(1) end, { desc = "next snippet item" })
+vim.keymap.set({"i", "s"}, "<C-K>", function() luasnip.jump(-1) end, { desc = "previous snippet item" })
 
 require('todo-comments').setup()
 
@@ -201,12 +207,8 @@ vim.keymap.set('n', '<leader>dq', dap.terminate, { desc = "dap terminate" })
 local dap_ui_widgets = require('dap.ui.widgets')
 vim.keymap.set({'n', 'v'}, '<leader>dh', dap_ui_widgets.hover, { desc = "dap hover" })
 vim.keymap.set({'n', 'v'}, '<leader>dp', dap_ui_widgets.preview, { desc = "dap preview" })
-vim.keymap.set('n', '<leader>df', function()
-    dap_ui_widgets.centered_float(dap_ui_widgets.frames)
-end, { desc = "dap frames" })
-vim.keymap.set('n', '<leader>dsc', function()
-    dap_ui_widgets.centered_float(dap_ui_widgets.scopes)
-end, { desc = "dap scopes" })
+vim.keymap.set('n', '<leader>df', function() dap_ui_widgets.centered_float(dap_ui_widgets.frames) end, { desc = "dap frames" })
+vim.keymap.set('n', '<leader>dsc', function() dap_ui_widgets.centered_float(dap_ui_widgets.scopes) end, { desc = "dap scopes" })
 
 lspconfig.texlab.setup({
     capabilities = my_capabilities
