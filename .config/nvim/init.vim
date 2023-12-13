@@ -16,7 +16,7 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 
-Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
+Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.1.1', 'do': 'make install_jsregexp'}
 Plug 'saadparwaiz1/cmp_luasnip'
 
 Plug 'mfussenegger/nvim-dap'
@@ -31,6 +31,9 @@ Plug 'tjdevries/colorbuddy.nvim', { 'branch': 'dev' }
 Plug 'jesseleite/nvim-noirbuddy'
 
 Plug 'sainnhe/gruvbox-material'
+Plug 'ellisonleao/gruvbox.nvim'
+Plug 'rose-pine/neovim'
+
 Plug 'sainnhe/sonokai'
 Plug 'sainnhe/everforest'
 Plug 'sainnhe/edge'
@@ -38,19 +41,40 @@ Plug 'EdenEast/nightfox.nvim'
 Plug 'preservim/vim-colors-pencil'
 Plug 'mweisshaupt1988/neobeans.vim', { 'as': 'neobeans' }
 Plug 'mcchrish/zenbones.nvim'
-Plug 'ellisonleao/gruvbox.nvim'
 Plug 'shaunsingh/nord.nvim'
 Plug 'Mofiqul/dracula.nvim'
 Plug 'ishan9299/nvim-solarized-lua'
 Plug 'rafamadriz/neon'
-Plug 'rose-pine/neovim'
 Plug 'folke/tokyonight.nvim'
+Plug 'marko-cerovac/material.nvim'
+Plug 'Abstract-IDE/Abstract-cs'
+Plug 'Mofiqul/vscode.nvim'
+Plug 'nyoom-engineering/oxocarbon.nvim'
+Plug 'jim-at-jibba/ariake-vim-colors'
+Plug 'mhartington/oceanic-next'
+Plug 'tanvirtin/monokai.nvim'
+Plug 'savq/melange-nvim'
+Plug 'fenetikm/falcon'
+Plug 'shaunsingh/moonlight.nvim'
+Plug 'navarasu/onedark.nvim'
+Plug 'kdheepak/monochrome.nvim'
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+Plug 'FrenzyExists/aquarium-vim'
+Plug 'kvrohit/substrata.nvim'
+Plug 'luisiacc/gruvbox-baby'
+Plug 'nvimdev/zephyr-nvim'
+Plug 'rebelot/kanagawa.nvim'
+Plug 'kvrohit/rasmus.nvim'
+Plug 'ramojus/mellifluous.nvim'
+Plug 'olivercederborg/poimandres.nvim'
+Plug 'maxmx03/FluoroMachine.nvim'
 
 Plug 'nvim-lualine/lualine.nvim'
 
 Plug 'numToStr/Comment.nvim'
 
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
+Plug 'nvim-telescope/telescope-file-browser.nvim'
 
 Plug 'folke/which-key.nvim'
 
@@ -79,9 +103,6 @@ set list
 set scrolloff=4
 set nowrap
 
-let g:netrw_banner=0
-let g:netrw_liststyle=3
-
 let g:gruvbox_material_background='hard'
 let g:gruvbox_material_foreground='mix'
 
@@ -101,9 +122,10 @@ autocmd BufWritePost *.cpp,*.h call CppFmt()
 
 au BufWritePost * lua require('lint').try_lint()
 
+
 lua << EOF
 require('nvim-treesitter.configs').setup({
-    auto_install = true,
+    ensure_installed = {"vim", "vimdoc", "lua", "gitignore", "rust", "toml", "latex", "markdown", "yaml", "cpp", "kotlin"},
     highlight = { enable = true },
     incremental_selection = { enable = true }
 })
@@ -128,7 +150,7 @@ require("mason-lspconfig").setup()
 
 require('lint').linters_by_ft = { markdown = { 'markdownlint' } }
 
-luasnip = require('luasnip')
+local luasnip = require('luasnip')
 
 local cmp = require('cmp')
 cmp.setup({
@@ -165,21 +187,22 @@ require('todo-comments').setup()
 local my_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local telescope = require('telescope')
-telescope.setup({ defaults = { file_ignore_patterns = { "%.pdf" } } })
+telescope.setup {
+    defaults = { file_ignore_patterns = { "%.pdf" } },
+    extensions = { file_browser = { hijack_netrw = true } }
+}
+telescope.load_extension("file_browser")
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '.ff', builtin.find_files, { desc = "find files" })
-vim.keymap.set('n', '.fl', builtin.live_grep, { desc = "search input string, respecting .gitignore" })
-vim.keymap.set('n', '.fb', builtin.buffers, { desc = "buffers" })
-vim.keymap.set('n', '.git', builtin.git_commits, { desc = "commits" })
-vim.keymap.set('n', '.gst', builtin.git_status, { desc = "git status" })
-vim.keymap.set('n', '.di', builtin.diagnostics, { desc = "diagnostics" })
-
-vim.keymap.set('n', '.td', require("telescope._extensions.todo-comments").exports.todo, { desc = "todo-comments" })
-
-vim.keymap.set('n', '<leader>di', vim.diagnostic.open_float, { desc = "open diagnostic in float" })
+vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "find files" })
+vim.keymap.set('n', '<leader>fl', builtin.live_grep, { desc = "search input string, respecting .gitignore" })
+vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "buffers" })
+vim.keymap.set('n', '<leader>fgc', builtin.git_commits, { desc = "commits" })
+vim.keymap.set('n', '<leader>fgs', builtin.git_status, { desc = "git status" })
+vim.keymap.set('n', '<leader>fdi', builtin.diagnostics, { desc = "diagnostics" })
+vim.keymap.set('n', '<leader>ftd', require("telescope._extensions.todo-comments").exports.todo, { desc = "todo-comments" })
+vim.keymap.set('n', '<leader>fdi', vim.diagnostic.open_float, { desc = "open diagnostic in float" })
 
 local lspconfig = require('lspconfig')
-
 vim.keymap.set('n', '<leader>gD', vim.lsp.buf.declaration, { desc = "go to declaration" })
 vim.keymap.set('n', '<leader>gd', builtin.lsp_definitions, { desc = "definitions" })
 vim.keymap.set('n', '<leader>gi', builtin.lsp_implementations, { desc = "implementations" })
@@ -191,7 +214,7 @@ vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = "code action
 
 lspconfig.rust_analyzer.setup({
     cmd = {'rustup', 'run', 'stable', 'rust-analyzer'},
-    capabilities = require('cmp_nvim_lsp').default_capabilities{},
+    capabilities = my_capabilities,
     settings = { ["rust-analyzer"] = { check = { command = "clippy" } } },
 })
 
@@ -211,6 +234,10 @@ vim.keymap.set('n', '<leader>df', function() dap_ui_widgets.centered_float(dap_u
 vim.keymap.set('n', '<leader>dsc', function() dap_ui_widgets.centered_float(dap_ui_widgets.scopes) end, { desc = "dap scopes" })
 
 lspconfig.texlab.setup({
+    capabilities = my_capabilities
+})
+
+lspconfig.kotlin_language_server.setup({
     capabilities = my_capabilities
 })
 
