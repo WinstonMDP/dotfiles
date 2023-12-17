@@ -16,7 +16,7 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 
-Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.1.1', 'do': 'make install_jsregexp'}
+Plug 'L3MON4D3/LuaSnip', {'do': 'make install_jsregexp'}
 Plug 'saadparwaiz1/cmp_luasnip'
 
 Plug 'mfussenegger/nvim-dap'
@@ -165,8 +165,8 @@ cmp.setup({
         ['<S-Tab>'] = cmp.mapping.select_prev_item(),
         ['<C-e>'] = cmp.mapping.abort(),
         ['<CR>'] = cmp.mapping.confirm({ select = false }),
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4)
+        ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-d>'] = cmp.mapping.scroll_docs(4)
     }),
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
@@ -199,8 +199,10 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "buffers" })
 vim.keymap.set('n', '<leader>fgc', builtin.git_commits, { desc = "commits" })
 vim.keymap.set('n', '<leader>fgs', builtin.git_status, { desc = "git status" })
 vim.keymap.set('n', '<leader>fdi', builtin.diagnostics, { desc = "diagnostics" })
+vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols, { desc = "document symbols" })
 vim.keymap.set('n', '<leader>ftd', require("telescope._extensions.todo-comments").exports.todo, { desc = "todo-comments" })
-vim.keymap.set('n', '<leader>fdi', vim.diagnostic.open_float, { desc = "open diagnostic in float" })
+
+vim.keymap.set('n', '<leader>di', vim.diagnostic.open_float, { desc = "open diagnostic in float" })
 
 local lspconfig = require('lspconfig')
 vim.keymap.set('n', '<leader>gD', vim.lsp.buf.declaration, { desc = "go to declaration" })
