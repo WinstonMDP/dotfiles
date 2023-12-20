@@ -1,5 +1,6 @@
 -- TODO: neorg
 -- TODO: multicursor
+-- TODO: DAP
 
 vim.opt.termguicolors = true
 
@@ -289,7 +290,7 @@ require("lazy").setup({
             local leap = require("leap")
             leap.add_default_mappings()
             leap.opts.safe_labels = {}
-            require("leap").add_repeat_mappings(";", ",", {
+            leap.add_repeat_mappings(";", ",", {
                 relative_directions = true,
                 modes = { "n", "x", "o" },
             })
