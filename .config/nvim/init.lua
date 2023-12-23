@@ -1,5 +1,3 @@
--- TODO: neorg
--- TODO: multicursor
 -- TODO: DAP
 
 vim.opt.termguicolors = true
@@ -92,6 +90,7 @@ require("lazy").setup({
     },
     {
         "rose-pine/neovim",
+        name = "rose",
         event = "VeryLazy",
     },
     {
@@ -288,7 +287,11 @@ require("lazy").setup({
         dependencies = "tpope/vim-repeat",
         config = function()
             local leap = require("leap")
-            leap.add_default_mappings()
+            vim.keymap.set({ "n", "x", "o" }, "f", "<Plug>(leap-forward-to)")
+            vim.keymap.set({ "n", "x", "o" }, "F", "<Plug>(leap-backward-to)")
+            vim.keymap.set({ "n", "x", "o" }, "t", "<Plug>(leap-forward-till)")
+            vim.keymap.set({ "n", "x", "o" }, "T", "<Plug>(leap-backward-till)")
+            vim.keymap.set({ "n", "x", "o" }, "<leader>w", "<Plug>(leap-from-window)")
             leap.opts.safe_labels = {}
             leap.add_repeat_mappings(";", ",", {
                 relative_directions = true,
@@ -296,5 +299,6 @@ require("lazy").setup({
             })
         end,
     },
-    "whonore/Coqtail",
+    { "kylechui/nvim-surround", config = true },
+    { "whonore/Coqtail", ft = "coq" },
 })
