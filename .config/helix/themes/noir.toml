@@ -1,0 +1,39 @@
+"ui.background" = { bg = "black", fg = "white" }
+"ui.background.separator" = "white"
+"ui.text" = "white"
+"ui.window" = "white"
+"ui.linenr" = "black_grey"
+"ui.linenr.selected" = "white"
+"ui.menu.selected" = { bg = "white", fg = "black" }
+"ui.cursor" = { bg = "black_grey" }
+"ui.cursor.primary" = { modifiers = ["reversed"] }
+"ui.selection" = { bg = "glass", fg = "white" }
+
+string = { fg = "white", modifiers = ["italic"] }
+type = { fg = "white", modifiers = ["bold"] }
+constant = { fg = "white", modifiers = ["italic"] }
+comment = "black_grey"
+variable = "white"
+punctuation = "black_grey"
+keyword = "black_grey"
+operator = "grey"
+namespace = { modifiers = ["italic"] }
+
+error = { fg = "red", modifiers = ["bold"] }
+"diagnostic.error" = { bg = "black", fg = "white", underline = { color = "red", style = "line" } }
+warning = { fg = "orange", modifiers = ["bold"] }
+"diagnostic.warning" = { bg = "black", fg = "white", underline = { color = "orange", style = "line" } }
+info = { fg = "blue", modifiers = ["bold"] }
+"diagnostic.info" = { bg = "black", fg = "white", underline = { color = "blue", style = "line" } }
+hint = { fg = "white", modifiers = ["bold"] }
+"diagnostic.hint" = { bg = "black", fg = "white", underline = { color = "white", style = "line" } }
+
+[palette]
+black = "#000000"
+white = "#ffffff"
+grey = "#cccccc"
+black_grey = "#888888"
+red = "#ff0000"
+orange = "#ffa500"
+blue = "#00ffff"
+glass = "#3b3b3b"

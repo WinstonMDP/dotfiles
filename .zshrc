@@ -10,4 +10,6 @@ SOBOLE_THEME_MODE=dark
 
 export VISUAL=nvim
 
+alias hx="helix"
+
 antigen apply
