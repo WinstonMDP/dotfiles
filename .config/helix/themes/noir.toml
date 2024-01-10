@@ -2,11 +2,11 @@
 "ui.background.separator" = "white"
 "ui.text" = "white"
 "ui.window" = "white"
-"ui.linenr" = "black_grey"
-"ui.linenr.selected" = "white"
+"ui.linenr" = "glass"
 "ui.menu.selected" = { bg = "white", fg = "black" }
 "ui.cursor" = { bg = "black_grey" }
 "ui.cursor.primary" = { modifiers = ["reversed"] }
+"ui.cursor.match" = { fg = "white", modifiers = ["bold"] }
 "ui.selection" = { bg = "glass", fg = "white" }
 
 string = { fg = "white", modifiers = ["italic"] }
@@ -19,14 +19,14 @@ keyword = "black_grey"
 operator = "grey"
 namespace = { modifiers = ["italic"] }
 
-error = { fg = "red", modifiers = ["bold"] }
-"diagnostic.error" = { bg = "black", fg = "white", underline = { color = "red", style = "line" } }
-warning = { fg = "orange", modifiers = ["bold"] }
-"diagnostic.warning" = { bg = "black", fg = "white", underline = { color = "orange", style = "line" } }
-info = { fg = "blue", modifiers = ["bold"] }
-"diagnostic.info" = { bg = "black", fg = "white", underline = { color = "blue", style = "line" } }
-hint = { fg = "white", modifiers = ["bold"] }
-"diagnostic.hint" = { bg = "black", fg = "white", underline = { color = "white", style = "line" } }
+error = "red"
+"diagnostic.error" = { underline = { color = "red", style = "line" } }
+warning = "orange"
+"diagnostic.warning" = { underline = { color = "orange", style = "line" } }
+info = "blue"
+"diagnostic.info" = { underline = { color = "blue", style = "line" } }
+hint = "white"
+"diagnostic.hint" = { underline = { color = "white", style = "line" } }
 
 [palette]
 black = "#000000"

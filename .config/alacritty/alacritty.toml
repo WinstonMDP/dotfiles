@@ -1,0 +1,14 @@
+import = ["~/.config/alacritty/themes/themes/hyper.toml"]
+
+[colors.cursor]
+cursor = "#ffffff"
+text = "#000000"
+
+[env]
+Term = "alacritty"
+
+[font]
+size = 13
+
+[font.normal]
+family = "my-font"

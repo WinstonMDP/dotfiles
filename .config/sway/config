@@ -223,7 +223,7 @@ bar {
         binding_mode #ffffff #ffffff #000000
     }
 
-    font JetBrainsMono Nerd Font 10
+    font my-font 10
 
     }
 
