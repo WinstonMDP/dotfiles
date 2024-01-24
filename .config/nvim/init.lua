@@ -54,21 +54,10 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     {
-        "jesseleite/nvim-noirbuddy",
+        "rose-pine/neovim",
+        name = "rose",
         priority = 1000,
-        dependencies = { "tjdevries/colorbuddy.nvim", branch = "dev" },
-        config = function()
-            require("noirbuddy").setup({
-                colors = {
-                    background = "#000000",
-                    primary = "#ffffff",
-                },
-            })
-            local _, colors, Group, _, _ = require("colorbuddy").setup()
-            Group.new("ErrorMsg", colors.primary, colors.background)
-            Group.new("SpellBad", colors.diagnostic_error)
-            Group.new("SpellRare", colors.diagnostic_warning)
-        end,
+        config = function() vim.cmd("colorscheme rose-pine") end,
     },
     {
         "sainnhe/gruvbox-material",
@@ -87,11 +76,6 @@ require("lazy").setup({
         "sainnhe/sonokai",
         event = "VeryLazy",
         config = true,
-    },
-    {
-        "rose-pine/neovim",
-        name = "rose",
-        event = "VeryLazy",
     },
     {
         "tanvirtin/monokai.nvim",
@@ -301,4 +285,12 @@ require("lazy").setup({
     },
     { "kylechui/nvim-surround", config = true },
     { "whonore/Coqtail", ft = "coq" },
+    {
+        "folke/noice.nvim",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "rcarriga/nvim-notify",
+        },
+        config = true,
+    },
 })
