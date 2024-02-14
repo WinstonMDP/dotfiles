@@ -4,12 +4,16 @@ antigen use oh-my-zsh
 
 antigen bundle zsh-users/zsh-syntax-highlighting
 
-antigen theme sobolevn/sobole-zsh-theme
+antigen apply
 
-SOBOLE_THEME_MODE=dark
-
-export VISUAL=nvim
+export VISUAL=helix
+export EDITOR="$VISUAL"
 
 alias hx="helix"
 
-antigen apply
+function z () {
+    __zoxide_z "$@"
+}
+eval "$(zoxide init zsh --no-cmd)"
+
+eval "$(starship init zsh)"

@@ -19,6 +19,8 @@ keyword = "black_grey"
 operator = "grey"
 namespace = { modifiers = ["italic"] }
 
+"markup.heading" = { fg = "white", modifiers = ["bold"] }
+
 error = "red"
 "diagnostic.error" = { underline = { color = "red", style = "line" } }
 warning = "orange"
