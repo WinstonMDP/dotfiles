@@ -1,12 +1,13 @@
-if status is-interactive
-    # Commands to run in interactive sessions can go here
-end
+set -U fish_greeting
+
+abbr -a hx helix
 
 set -gx VISUAL helix
 set -gx EDITOR $VISUAL
 
-set -U fish_greeting
-abbr -a hx helix
+set -gx _JAVA_AWT_WM_NONREPARENTING 1
+
+fish_add_path  /usr/lib/rustup/bin
 
 starship init fish | source
 zoxide init fish | source
