@@ -8,6 +8,8 @@
 "ui.cursor.primary" = { modifiers = ["reversed"] }
 "ui.cursor.match" = { fg = "white", modifiers = ["bold"] }
 "ui.selection" = { bg = "glass", fg = "white" }
+"ui.virtual.inlay-hint" = "white_glass"
+"ui.virtual.ruler" = { fg = "glass", bg = "glass" }
 
 string = { fg = "white", modifiers = ["italic"] }
 type = { fg = "white", modifiers = ["bold"] }
@@ -35,7 +37,8 @@ black = "#000000"
 white = "#ffffff"
 grey = "#cccccc"
 black_grey = "#888888"
+white_glass = "#666666"
+glass = "#3b3b3b"
 red = "#ff0000"
 orange = "#ffa500"
 blue = "#00ffff"
-glass = "#3b3b3b"

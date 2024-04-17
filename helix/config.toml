@@ -2,7 +2,6 @@ theme = "noir"
 
 [editor]
 true-color = true
-line-number = "relative"
 
 [editor.file-picker]
 parents = false

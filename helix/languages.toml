@@ -1,5 +1,10 @@
 [language-server.rust-analyzer.config.check]
 command = "clippy"
 
-[language-server.texlab.config.texlab.build]
-onSave = true
+[language-server.typst-lsp]
+command = "/home/WinstonMDPLinux/other/builded/typst-lsp/target/release/typst-lsp"
+config = { experimentalFormatterMode = "on" }
+
+[[language]]
+name = "markdown"
+rulers = [80]
