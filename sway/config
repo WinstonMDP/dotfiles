@@ -239,8 +239,8 @@ input "type:keyboard" {
     xkb_options grp:rctrl_toggle
 }
 
-bindsym Print exec grim -g "$(slurp)" ~/other/screenshots/screen-"$(date +%s)".png
-bindsym $mod+Print exec wf-recorder -x yuv420p -g "$$(slurp)" -f ~/other/screenshots/recording_$(date +"%Y-%m-%d_%H:%M:%S.mp4")
+bindsym Print exec grim -g "$(slurp)" ~/screenshots/screen-"$(date +%s)".png
+bindsym $mod+Print exec wf-recorder -x yuv420p -g "$$(slurp)" -f ~/screenshots/recording_$(date +"%Y-%m-%d_%H:%M:%S.mp4")
 bindsym $mod+BackSpace exec killall -s SIGINT wf-recorder
 
 include /etc/sway/config.d/*

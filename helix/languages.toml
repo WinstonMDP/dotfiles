@@ -2,7 +2,7 @@
 command = "clippy"
 
 [language-server.typst-lsp]
-command = "/home/WinstonMDPLinux/other/builded/typst-lsp/target/release/typst-lsp"
+command = "/home/WinstonMDPLinux/builded/typst-lsp/target/release/typst-lsp"
 config = { experimentalFormatterMode = "on" }
 
 [[language]]

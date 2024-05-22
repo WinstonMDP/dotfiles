@@ -2,9 +2,13 @@ theme = "noir"
 
 [editor]
 true-color = true
+line-number = "relative"
 
 [editor.file-picker]
 parents = false
 
 [editor.statusline]
 right = ["diagnostics", "selections", "register", "position", "position-percentage", "file-encoding"]
+
+[editor.lsp]
+display-inlay-hints = true
