@@ -243,4 +243,7 @@ bindsym Print exec grim -g "$(slurp)" ~/screenshots/screen-"$(date +%s)".png
 bindsym $mod+Print exec wf-recorder -x yuv420p -g "$$(slurp)" -f ~/screenshots/recording_$(date +"%Y-%m-%d_%H:%M:%S.mp4")
 bindsym $mod+BackSpace exec killall -s SIGINT wf-recorder
 
+client.focused #ffffff #ffffff #000000 #000000 #ffffff
+client.unfocused #000000 #000000 #ffffff #ffffff #000000
+
 include /etc/sway/config.d/*
