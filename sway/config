@@ -223,9 +223,8 @@ bar {
         binding_mode #ffffff #ffffff #000000
     }
 
-    font my-font 10
-
-    }
+    font "JetBrainsMono Nerd Font" 10
+}
 
 bindsym $mod+o bar bar1 mode dock
 bindsym $mod+p bar bar1 mode invisible

@@ -11,4 +11,4 @@ Term = "alacritty"
 size = 13
 
 [font.normal]
-family = "my-font"
+family = "JetBrainsMono Nerd Font"
