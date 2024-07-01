@@ -10,7 +10,7 @@
 "ui.selection" = { bg = "glass", fg = "white" }
 "ui.virtual.inlay-hint" = "white_glass"
 "ui.virtual.inlay-hint.type" = { fg = "white_glass", modifiers = ["italic"] }
-"ui.virtual.ruler" = { fg = "glass", bg = "glass" }
+"ui.virtual.ruler" = { bg = "glass" }
 "ui.menu.scroll" = "white_glass"
 
 type = { fg = "white", modifiers = ["italic"] }
