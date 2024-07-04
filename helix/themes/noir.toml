@@ -2,7 +2,7 @@
 "ui.background.separator" = "white"
 "ui.text" = "white"
 "ui.window" = "white"
-"ui.linenr" = "glass"
+"ui.linenr" = "white_glass"
 "ui.menu.selected" = { bg = "white", fg = "black" }
 "ui.cursor" = { bg = "black_grey" }
 "ui.cursor.primary" = { modifiers = ["reversed"] }
@@ -17,7 +17,7 @@ type = { fg = "white", modifiers = ["italic"] }
 keyword = "black_grey"
 punctuation = "grey"
 operator = "grey"
-comment = "white_glass"
+comment = { fg = "white_glass", modifiers = ["italic"] }
 
 "markup.heading" = { fg = "white", modifiers = ["bold"] }
 
