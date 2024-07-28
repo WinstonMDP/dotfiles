@@ -20,6 +20,8 @@ operator = "grey"
 comment = { fg = "white_glass", modifiers = ["italic"] }
 
 "markup.heading" = { fg = "white", modifiers = ["bold"] }
+"markup.bold" = { fg = "white", modifiers = ["bold"] }
+"markup.italic" = { fg = "white", modifiers = ["italic"] }
 
 error = "red"
 "diagnostic.error" = { underline = { color = "red", style = "line" } }
@@ -27,8 +29,8 @@ warning = "orange"
 "diagnostic.warning" = { underline = { color = "orange", style = "line" } }
 info = "blue"
 "diagnostic.info" = { underline = { color = "blue", style = "line" } }
-hint = "white"
-"diagnostic.hint" = { underline = { color = "white", style = "line" } }
+hint = "green"
+"diagnostic.hint" = { underline = { color = "green", style = "line" } }
 
 [palette]
 black = "#000000"
@@ -40,3 +42,6 @@ glass = "#3b3b3b"
 red = "#ff0000"
 orange = "#ffa500"
 blue = "#00ffff"
+green = "#39FF14"
+# rose = "#FF00FF"
+# rose = "#FE0194"
