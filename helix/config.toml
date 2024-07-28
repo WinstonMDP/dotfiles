@@ -3,12 +3,13 @@ theme = "noir"
 [editor]
 true-color = true
 line-number = "relative"
-
-[editor.file-picker]
-parents = false
+end-of-line-diagnostics = "hint"
 
 [editor.statusline]
 right = ["diagnostics", "selections", "register", "position", "position-percentage", "file-encoding"]
 
 [editor.lsp]
 display-inlay-hints = true
+
+[editor.inline-diagnostics]
+cursor-line = "warning" 
