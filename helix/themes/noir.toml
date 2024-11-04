@@ -2,46 +2,43 @@
 "ui.background.separator" = "white"
 "ui.text" = "white"
 "ui.window" = "white"
-"ui.linenr" = "white_glass"
+"ui.popup" = "white"
+"ui.linenr" = "grey"
 "ui.menu.selected" = { bg = "white", fg = "black" }
 "ui.cursor" = { bg = "black_grey" }
 "ui.cursor.primary" = { modifiers = ["reversed"] }
 "ui.cursor.match" = { fg = "white", modifiers = ["bold"] }
-"ui.selection" = { bg = "glass", fg = "white" }
-"ui.virtual.inlay-hint" = "white_glass"
-"ui.virtual.inlay-hint.type" = { fg = "white_glass", modifiers = ["italic"] }
-"ui.virtual.ruler" = { bg = "glass" }
-"ui.menu.scroll" = "white_glass"
+"ui.selection" = { bg = "glass" }
+"ui.virtual.inlay-hint" = "grey"
+"ui.virtual.inlay-hint.type" = { fg = "grey", modifiers = ["italic"] }
+"ui.virtual.ruler" = { bg = "black_glass" }
+"ui.menu.scroll" = "grey"
+"ui.statusline.select" = "glass"
+"ui.gutter" = "black_grey"
 
 type = { fg = "white", modifiers = ["italic"] }
-keyword = "black_grey"
+keyword = "grey"
 punctuation = "grey"
-operator = "grey"
-comment = { fg = "white_glass", modifiers = ["italic"] }
+operator = "white"
+comment = { fg = "grey", modifiers = ["italic"] }
 
 "markup.heading" = { fg = "white", modifiers = ["bold"] }
 "markup.bold" = { fg = "white", modifiers = ["bold"] }
 "markup.italic" = { fg = "white", modifiers = ["italic"] }
 
-error = "red"
-"diagnostic.error" = { underline = { color = "red", style = "line" } }
-warning = "orange"
-"diagnostic.warning" = { underline = { color = "orange", style = "line" } }
-info = "blue"
-"diagnostic.info" = { underline = { color = "blue", style = "line" } }
-hint = "green"
-"diagnostic.hint" = { underline = { color = "green", style = "line" } }
+error = "grey"
+"diagnostic.error" = { underline = { color = "grey", style = "curl" } }
+warning = "grey"
+"diagnostic.warning" = { underline = { color = "grey", style = "dashed" } }
+info = "grey"
+"diagnostic.info" = { underline = { color = "grey", style = "line" } }
+hint = "grey"
+"diagnostic.hint" = { underline = { color = "grey", style = "double_line" } }
 
 [palette]
-black = "#000000"
 white = "#ffffff"
-grey = "#cccccc"
-black_grey = "#888888"
-white_glass = "#666666"
-glass = "#3b3b3b"
-red = "#ff0000"
-orange = "#ffa500"
-blue = "#00ffff"
-green = "#39FF14"
-# rose = "#FF00FF"
-# rose = "#FE0194"
+grey = "#999999"
+black_grey = "#666666"
+glass = "#333333"
+black_glass = "#111111"
+black = "#000000"

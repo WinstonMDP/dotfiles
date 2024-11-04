@@ -1,10 +1,11 @@
-[language-server.rust-analyzer.config.check]
-command = "clippy"
+[language-server.rust-analyzer]
+cargo.buildScripts.enable = "true"
+config.check.command = "clippy"
 
-[language-server.typst-lsp]
-command = "/home/WinstonMDPLinux/builded/typst-lsp/target/release/typst-lsp"
-config = { experimentalFormatterMode = "on" }
+[language-server.tinymist]
+config = { exportPdf = "onType" }
 
 [[language]]
-name = "markdown"
-rulers = [80]
+name = "c"
+formatter = { command = "clang-format" }
+auto-format = true

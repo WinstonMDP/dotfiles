@@ -1,4 +1,4 @@
-set font "JetBrainsMono Nerd Font 12"
+set font "JetBrainsMono NFM 12"
 set guioptions none
 set show-recent 0
 set selection-clipboard clipboard

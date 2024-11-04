@@ -15,3 +15,8 @@ fish_add_path $GOPATH/bin
 
 starship init fish | source
 zoxide init fish | source
+
+fish_add_path /home/WinstonMDPLinux/.cargo/bin
+fish_add_path /home/WinstonMDPLinux/it/oxi/target/release
+
+abbr --add zf zathura --fork
