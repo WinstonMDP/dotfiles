@@ -3,7 +3,7 @@ cargo.buildScripts.enable = "true"
 config.check.command = "clippy"
 
 [language-server.tinymist]
-config = { exportPdf = "onType" }
+config = { exportPdf = "onType", formatterMode = "typstyle", formatterPrintWidth = 80 }
 
 [[language]]
 name = "c"
