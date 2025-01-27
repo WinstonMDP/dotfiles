@@ -5,7 +5,6 @@ true-color = true
 line-number = "relative"
 end-of-line-diagnostics = "hint"
 color-modes = true
-rulers = [81]
 
 [editor.statusline]
 right = ["diagnostics", "selections", "register", "position", "position-percentage", "file-encoding"]
