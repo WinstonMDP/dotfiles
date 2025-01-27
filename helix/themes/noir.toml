@@ -26,14 +26,10 @@ comment = { fg = "grey", modifiers = ["italic"] }
 "markup.bold" = { fg = "white", modifiers = ["bold"] }
 "markup.italic" = { fg = "white", modifiers = ["italic"] }
 
-error = "grey"
-"diagnostic.error" = { underline = { color = "grey", style = "curl" } }
-warning = "grey"
-"diagnostic.warning" = { underline = { color = "grey", style = "dashed" } }
-info = "grey"
-"diagnostic.info" = { underline = { color = "grey", style = "line" } }
-hint = "grey"
-"diagnostic.hint" = { underline = { color = "grey", style = "double_line" } }
+error = "red"
+"diagnostic.error" = { underline = { color = "red", style = "line" } }
+warning = "yellow"
+"diagnostic.warning" = { underline = { color = "yellow", style = "line" } }
 
 [palette]
 white = "#ffffff"
@@ -42,3 +38,5 @@ black_grey = "#666666"
 glass = "#333333"
 black_glass = "#111111"
 black = "#000000"
+red = "#ff0000"
+yellow = "#ffff00"
