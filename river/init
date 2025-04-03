@@ -58,5 +58,9 @@ riverctl keyboard-layout -options grp:rctrl_toggle "us,ru"
 
 riverctl rule-add -app-id "*" ssd
 
+systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river
+systemctl --user restart xdg-desktop-portal
+
 riverctl default-layout rivertile
 rivertile -view-padding 0 -outer-padding 0 -main-ratio 0.5 &

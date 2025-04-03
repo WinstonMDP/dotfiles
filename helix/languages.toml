@@ -9,3 +9,8 @@ config = { exportPdf = "onType", formatterMode = "typstyle", formatterPrintWidth
 name = "c"
 formatter = { command = "clang-format" }
 auto-format = true
+
+[[language]]
+name = "cpp"
+formatter = { command = "clang-format" }
+auto-format = true

@@ -1,4 +1,4 @@
-theme = "noir"
+theme = "autumn_night"
 
 [editor]
 true-color = true
@@ -8,6 +8,9 @@ color-modes = true
 
 [editor.statusline]
 right = ["diagnostics", "selections", "register", "position", "position-percentage", "file-encoding"]
+
+[editor.search]
+wrap-around = false
 
 [editor.lsp]
 display-inlay-hints = true
