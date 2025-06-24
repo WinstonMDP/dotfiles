@@ -1,4 +1,5 @@
 set font "JetBrainsMono NFM 12"
 set guioptions none
 set show-recent 0
+set search-hadjust false
 set selection-clipboard clipboard
